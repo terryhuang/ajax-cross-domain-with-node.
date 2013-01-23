@@ -1,0 +1,44 @@
+<html>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script type="text/javascript" src="cors.js"></script>
+	<script type="text/javascript">
+		function testGetFromNodeServer()
+		{
+			getCORS('http://localhost:8889/cros', null, function(data){alert(data);});
+		}
+		function testGetFromJsp()
+		{
+			getCORS('http://localhost:8888/test/jsp/date1.jsp', null, function(data){alert(data);});
+		}
+		function testPostToJsp(form)
+		{
+		    postCORS('http://localhost:8888/test/jsp/date1.jsp', {name: form.name.value}, function(data){alert(data);});
+		}
+		function testPostToNode(form)
+		{
+		    postCORS('http://localhost:8889/cros?terry', {name: form.name.value}, function(data){alert(data);});
+		}
+	</script>
+	<body>
+		<h1>CORS Examples</h1>
+		<p>Test GET
+		    This page retrieves content from another server, using CORS<br /> 
+		    <a href="#" onclick="testGetFromJsp(); return false;">testGetFromJsp</a>
+		    <a href="#" onclick="testGetFromNodeServer(); return false;">testGetFromNodeServer</a>
+		
+		</p>
+		<p>Test POST(jsp):
+		    <form action="#" onsubmit="testPostToJsp(this); return false">
+		        Name: <input type="text" name="name" />
+		        <input type="submit" />
+		    </form>
+		</p>
+		<p>Test POST(node):
+		    <form action="#" onsubmit="testPostToNode(this); return false">
+		        Name: <input type="text" name="name" />
+		        <input type="submit" />
+		    </form>
+		</p>
+		<a href="http://saltybeagle.com/2009/09/cross-origin-resource-sharing-demo/">More info</a>
+	</body>
+</html>
